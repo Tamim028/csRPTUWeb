@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RPTU M.Sc. Computer Science - Course Overview</title>
+  <style>
+    :root {
+      --bg: #090f1f;
+      --panel: rgba(17, 24, 39, .88);
+      --panel-2: rgba(15, 23, 42, .92);
+      --text: #e5eefc;
+      --muted: #9fb0c9;
+      --line: rgba(148, 163, 184, .16);
+      --accent: #60a5fa;
+      --accent-2: #a78bfa;
+      --green: #22c55e;
+      --shadow: 0 18px 50px rgba(0,0,0,.32);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(96, 165, 250, .22), transparent 34rem),
+        radial-gradient(circle at top right, rgba(167, 139, 250, .18), transparent 30rem),
+        linear-gradient(180deg, #090f1f 0%, #0b1020 45%, #080d19 100%);
+      color: var(--text);
+      line-height: 1.65;
+    }
+    a { color: inherit; }
+    .container { width: min(1180px, calc(100% - 32px)); margin: 0 auto; padding: 24px 0 56px; }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      background: linear-gradient(135deg, rgba(96,165,250,.18), rgba(167,139,250,.14));
+      box-shadow: var(--shadow);
+      padding: 28px;
+      margin-bottom: 18px;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      background: radial-gradient(circle at 85% 10%, rgba(34,197,94,.17), transparent 18rem);
+      pointer-events: none;
+    }
+    .hero-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 18px; position: relative; z-index: 1; }
+    .hero h1 { margin: 0; font-size: clamp(2rem, 3vw, 3.2rem); line-height: 1.1; letter-spacing: -.04em; }
+    .hero p { margin: 12px 0 0; color: var(--muted); max-width: 780px; }
+    .tracker-button, .print-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: linear-gradient(135deg, rgba(96,165,250,.96), rgba(167,139,250,.92));
+      color: #07111f;
+      font-weight: 800;
+      text-decoration: none;
+      white-space: nowrap;
+      box-shadow: 0 10px 26px rgba(96,165,250,.22);
+      cursor: pointer;
+      font-size: .95rem;
+    }
+    .print-button { background: rgba(15, 23, 42, .78); color: var(--text); box-shadow: none; }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 18px 0; }
+    .stat {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: 0 12px 34px rgba(0,0,0,.16);
+    }
+    .stat .label { color: var(--muted); font-size: .82rem; margin-bottom: 5px; }
+    .stat .value { font-size: 1.55rem; font-weight: 900; letter-spacing: -.02em; }
+    .layout { display: grid; grid-template-columns: 290px 1fr; gap: 18px; align-items: start; }
+    .nav {
+      position: sticky;
+      top: 16px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 14px;
+      max-height: calc(100vh - 32px);
+      overflow: auto;
+      box-shadow: var(--shadow);
+    }
+    .nav h3 { margin: 3px 8px 10px; font-size: .9rem; color: #dbeafe; text-transform: uppercase; letter-spacing: .08em; }
+    .nav a {
+      display: block;
+      text-decoration: none;
+      color: var(--muted);
+      padding: 8px 10px;
+      border-radius: 12px;
+      font-size: .9rem;
+    }
+    .nav a:hover { color: var(--text); background: rgba(96,165,250,.1); }
+    .content-card {
+      position: relative;
+      overflow: hidden;
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 22px;
+      margin-bottom: 16px;
+      box-shadow: 0 14px 34px rgba(0,0,0,.18);
+    }
+    .card-accent { position: absolute; inset: 0 auto 0 0; width: 5px; background: linear-gradient(180deg, var(--accent), var(--accent-2)); }
+    .content-card h2 { margin: 0 0 10px 0; font-size: 1.25rem; letter-spacing: -.02em; }
+    .content-card p { margin: 0 0 12px; color: #c9d7ef; }
+    .content-card ul { margin: 10px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+    .content-card li {
+      position: relative;
+      padding: 9px 12px 9px 36px;
+      border-radius: 13px;
+      background: rgba(8, 15, 31, .58);
+      border: 1px solid rgba(148,163,184,.10);
+      color: #dbe7fb;
+    }
+    .content-card li::before {
+      content: "✓";
+      position: absolute;
+      left: 12px;
+      top: 9px;
+      color: var(--green);
+      font-weight: 900;
+    }
+    .note { margin-top: 18px; color: var(--muted); font-size: .92rem; }
+    @media (max-width: 920px) {
+      .layout { grid-template-columns: 1fr; }
+      .nav { position: relative; top: auto; max-height: none; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .container { width: min(100% - 20px, 1180px); padding-top: 10px; }
+      .hero { padding: 20px; }
+      .hero-top { flex-direction: column; }
+      .actions, .tracker-button, .print-button { width: 100%; }
+      .stats { grid-template-columns: 1fr; }
+    }
+    @media print {
+      body { background: white; color: #111827; }
+      .hero, .stat, .nav, .content-card { box-shadow: none; background: white; color: #111827; }
+      .nav, .actions { display: none; }
+      .layout { display: block; }
+      .content-card { break-inside: avoid; border-color: #d1d5db; }
+      .content-card p, .content-card li { color: #111827; }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <section class="hero">
+      <div class="hero-top">
+        <div>
+          <h1>RPTU M.Sc. Computer Science Overview</h1>
+          <p>Clean overview of the examination and study rules, including credit requirements, specialization structure, exam rules, grading, retakes, and thesis requirements.</p>
+        </div>
+        <div class="actions">
+          <a class="tracker-button" href="index.html">Course Tracker</a>
+          <button class="print-button" onclick="window.print()">Print</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats" aria-label="Program highlights">
+      <div class="stat"><div class="label">Total Program Credits</div><div class="value">120 ECTS</div></div>
+      <div class="stat"><div class="label">Course Modules</div><div class="value">90 ECTS</div></div>
+      <div class="stat"><div class="label">Master’s Thesis</div><div class="value">30 ECTS</div></div>
+      <div class="stat"><div class="label">Normal Study Load</div><div class="value">30 ECTS/Sem.</div></div>
+    </section>
+
+    <div class="layout">
+      <aside class="nav">
+        <h3>Contents</h3>
+        <a href="#overview">Overview</a><a href="#degree-structure">Degree Structure and Credit Requirements</a><a href="#ects-distribution">Required Distribution of ECTS</a><a href="#specializations">Available Specializations</a><a href="#supplementary-area">Supplementary Area</a><a href="#registration-withdrawal">Registration and Withdrawal from Exams</a><a href="#exam-types">Types of Examinations</a><a href="#oral-exams">Oral Examinations</a><a href="#written-exams">Written Examinations</a><a href="#grading">Grading System</a><a href="#retakes">Repeating Failed Exams</a><a href="#missing-cheating">Missing Exams, Withdrawal, and Cheating</a><a href="#extensions">Extensions and Special Circumstances</a><a href="#masters-thesis">Master’s Thesis</a><a href="#thesis-evaluation">Thesis Evaluation and Colloquium</a><a href="#passing-degree">Passing the Degree</a><a href="#degree-documents">Degree Documents</a><a href="#aptitude">Aptitude Assessment Procedure</a><a href="#validity">Validity of the Regulation</a><a href="#summary">Short Overall Summary</a>
+      </aside>
+      <div>
+        
+      <section class="content-card" id="overview">
+        <div class="card-accent"></div>
+        <h2>Overview</h2>
+        <p>This document explains the examination and study rules for the Master’s program in Computer Science at RPTU Kaiserslautern-Landau. The degree awarded is Master of Science (M.Sc.). The program is research-oriented and is mainly taught in English. It defines admission requirements, degree structure, examination rules, grading, repetition rules, and the Master’s thesis process.</p>
+        
+      </section>
+    
+      <section class="content-card" id="degree-structure">
+        <div class="card-accent"></div>
+        <h2>5. Degree Structure and Credit Requirements</h2>
+        <p>The program requires a total of 120 ECTS credits. Normally, students complete around 30 ECTS per semester. Each completed module gives ECTS credits based on workload. One ECTS corresponds to about 30 hours of work.</p>
+        <ul><li>90 ECTS in modules</li><li>30 ECTS for the Master’s thesis</li><li>Sections: Theoretical Computer Science, Formal Foundations, Specialization 1, Specialization 2, Supplementary Area, and Master’s Thesis</li></ul>
+      </section>
+    
+      <section class="content-card" id="ects-distribution">
+        <div class="card-accent"></div>
+        <h2>6. Required Distribution of ECTS</h2>
+        <p>Students must complete the degree according to the minimum and maximum requirements below. In Specialization 1, students must complete at least one seminar and one project. Specialization 2 must be different from Specialization 1. Data Science may only be chosen as Specialization 1, not as Specialization 2.</p>
+        <ul><li>At least 8 ECTS in Theoretical Computer Science</li><li>At least 8 ECTS in Formal Foundations</li><li>At least 28 ECTS in Specialization 1</li><li>At least 12 ECTS in Specialization 2</li><li>Up to 34 ECTS in the Supplementary Area</li><li>30 ECTS for the Master’s thesis</li></ul>
+      </section>
+    
+      <section class="content-card" id="specializations">
+        <div class="card-accent"></div>
+        <h2>7. Available Specializations</h2>
+        <p>The program offers several specialization areas. Each specialization may include subareas such as foundations, seminars, and projects. Some specializations also contain mandatory subsections.</p>
+        <ul><li>Algorithmics and Deduction</li><li>Software Engineering</li><li>Distributed and Networked Systems</li><li>Embedded Systems and Robotics</li><li>Visualization and Scientific Computing</li><li>Information Systems</li><li>Intelligent Systems</li><li>Data Science</li></ul>
+      </section>
+    
+      <section class="content-card" id="supplementary-area">
+        <div class="card-accent"></div>
+        <h2>8. Supplementary Area</h2>
+        <p>The Supplementary Area is flexible. Students may choose modules from other Computer Science specializations or from other departments at RPTU. This section allows students to broaden their academic profile.</p>
+        <ul><li>Bachelor-level modules from other departments may count only up to 10 ECTS</li><li>Non-technical or interdisciplinary qualification modules may count up to 8 ECTS</li><li>For language courses, at most 6 ECTS total can be counted</li><li>For language courses, at most 3 ECTS per language level can be counted</li></ul>
+      </section>
+    
+      <section class="content-card" id="registration-withdrawal">
+        <div class="card-accent"></div>
+        <h2>9. Registration and Withdrawal from Exams</h2>
+        <p>Students must register for all module examinations and retakes. Registration should normally be done through the campus management system within the announced deadlines. A student may withdraw from an exam without giving a reason up to one week before the exam date. After that deadline, withdrawal is possible only in justified exceptional cases.</p>
+        <ul><li>Pay attention to examination deadlines</li><li>Delayed required first attempts may automatically count as failed</li><li>Master’s thesis registration is tied to the end of the sixth semester</li><li>If the thesis is not started by the end of the eighth semester, it is counted as failed for the first time</li></ul>
+      </section>
+    
+      <section class="content-card" id="exam-types">
+        <div class="card-accent"></div>
+        <h2>10. Types of Examinations</h2>
+        <p>Module examinations can be conducted in different forms. The exact form depends on the module and is specified in the module handbook or announced by the examiner.</p>
+        <ul><li>Oral examinations</li><li>Written examinations</li><li>Assignments / papers</li><li>Portfolios</li><li>Electronic examinations</li><li>Presentations or similar performance tasks</li></ul>
+      </section>
+    
+      <section class="content-card" id="oral-exams">
+        <div class="card-accent"></div>
+        <h2>11. Oral Examinations</h2>
+        <p>Oral exams are usually individual exams. Their length is generally based on the module credits: about 4 minutes per ECTS, with a minimum of 20 minutes and a maximum of 60 minutes. Oral exams are conducted either by two examiners or by one examiner in the presence of a qualified observer.</p>
+        
+      </section>
+    
+      <section class="content-card" id="written-exams">
+        <div class="card-accent"></div>
+        <h2>12. Written Examinations</h2>
+        <p>Written examinations may take several forms. For a Klausur, the duration is usually 15 minutes per ECTS, with a minimum of 60 minutes and a maximum of 180 minutes. E-exams may last 20 minutes per ECTS, also with limits between 60 and 180 minutes.</p>
+        <ul><li>Klausur: written exam under supervision</li><li>Hausarbeit: term paper</li><li>Portfolio</li><li>E-exam</li></ul>
+      </section>
+    
+      <section class="content-card" id="grading">
+        <div class="card-accent"></div>
+        <h2>13. Grading System</h2>
+        <p>A module is passed if the grade is at least 4.0 or marked as passed. The final Master’s grade is the weighted average of the module grades according to the rules in the annex.</p>
+        <ul><li>1.0 / 1.3 = Very Good</li><li>1.7 / 2.0 / 2.3 = Good</li><li>2.7 / 3.0 / 3.3 = Satisfactory</li><li>3.7 / 4.0 = Sufficient / Pass</li><li>5.0 = Fail</li></ul>
+      </section>
+    
+      <section class="content-card" id="retakes">
+        <div class="card-accent"></div>
+        <h2>14. Repeating Failed Exams</h2>
+        <p>Passed exams cannot be repeated. Failed written and oral module exams can generally be repeated twice. A failed elective module may also be replaced with another elective module instead of being repeated. For the Master’s thesis, separate repetition rules apply.</p>
+        <ul><li>Second failed written retake in the form of a Klausur may require an additional oral supplementary exam before a final 5.0 is given</li><li>The supplementary oral exam only decides whether the result becomes 4.0 or worse</li></ul>
+      </section>
+    
+      <section class="content-card" id="missing-cheating">
+        <div class="card-accent"></div>
+        <h2>15. Missing Exams, Withdrawal, and Cheating</h2>
+        <p>If a student misses an exam, withdraws after it begins, misses a deadline, or does not submit work on time without a valid reason, the result is normally recorded as failed. Acceptable reasons must be reported immediately, usually with proper evidence such as medical documentation. If a student cheats or uses unauthorized aids, the exam is graded as failed. In severe cases, the student may be excluded from further examinations in the program.</p>
+        
+      </section>
+    
+      <section class="content-card" id="extensions">
+        <div class="card-accent"></div>
+        <h2>16. Extensions and Special Circumstances</h2>
+        <p>Extensions or interruptions of deadlines may be granted in justified situations. Students must provide appropriate proof. Students with disabilities or chronic illness may also apply for accommodations, such as extra time or a different examination format.</p>
+        <ul><li>Illness</li><li>Disability or chronic illness</li><li>Pregnancy or childcare</li><li>Caring for dependents</li><li>Official academic committee work</li><li>Approved study abroad</li><li>Startup activity</li><li>Certain work-related reasons in special study formats</li></ul>
+      </section>
+    
+      <section class="content-card" id="masters-thesis">
+        <div class="card-accent"></div>
+        <h2>17. Master’s Thesis</h2>
+        <p>The Master’s thesis is a compulsory module worth 30 ECTS. To begin the thesis, a student normally must have completed at least 60 ECTS. When registering for the thesis, the student must also officially choose Specialization 1 and Specialization 2. The standard thesis period is six months. In special justified cases, it may be extended by up to three months.</p>
+        <ul><li>Written thesis</li><li>Colloquium: oral defense/presentation</li><li>The thesis may be written in German or English</li><li>With approval, another language may also be used if academic supervision is available</li><li>The topic may be returned only once and only within the first two weeks</li><li>The thesis must be submitted electronically through the official platform</li><li>The thesis must include a declaration that it was written independently</li></ul>
+      </section>
+    
+      <section class="content-card" id="thesis-evaluation">
+        <div class="card-accent"></div>
+        <h2>18. Thesis Evaluation and Colloquium</h2>
+        <p>The thesis is normally evaluated by two reviewers. If both give the same grade, that becomes the thesis grade. If their grades differ but both are passing, the average is used according to the official grading scale. If one reviewer gives 5.0 and the other does not, an additional evaluation process is used. A final grade of 5.0 can only be given if at least two examiners support that result.</p>
+        <ul><li>The colloquium should take place within four weeks after thesis submission</li><li>The colloquium includes a 20-minute presentation</li><li>The colloquium includes a 30 to 45 minute academic discussion</li><li>If the thesis is failed the first time, the student may apply for a new topic within four weeks</li><li>A second repeat is not allowed</li></ul>
+      </section>
+    
+      <section class="content-card" id="passing-degree">
+        <div class="card-accent"></div>
+        <h2>19. Passing the Degree</h2>
+        <p>The Master’s degree is passed when all required coursework and examinations, including the thesis and colloquium, have been successfully completed. If a required examination can no longer be taken or repeated, the Master’s examination is considered finally failed.</p>
+        
+      </section>
+    
+      <section class="content-card" id="degree-documents">
+        <div class="card-accent"></div>
+        <h2>20. Degree Documents</h2>
+        <p>After passing, the student receives official documents showing the overall grade, completed modules, credits, and thesis title. Students who leave without finishing or who fail permanently can request a record of the achievements they completed.</p>
+        <ul><li>Certificate in German and English</li><li>Master’s degree certificate</li><li>Diploma Supplement in English</li></ul>
+      </section>
+    
+      <section class="content-card" id="aptitude">
+        <div class="card-accent"></div>
+        <h2>21. Aptitude Assessment Procedure</h2>
+        <p>The aptitude assessment checks whether an applicant is academically suitable for the Master’s program. The assessment includes checking whether the prior degree is equivalent in scope, content, and orientation to the RPTU Bachelor’s in Computer Science. The result is either suitable or not suitable. If suitability cannot be decided from the documents, the committee may request additional documents or ask the applicant to give a presentation.</p>
+        <ul><li>Degree certificate and transcript</li><li>Description of previous coursework</li><li>Statement of motivation and study goals</li><li>CV and relevant practical experience</li><li>Expected background: Theoretical Foundations</li><li>Expected background: Software Development</li><li>Expected background: Computer Systems</li></ul>
+      </section>
+    
+      <section class="content-card" id="validity">
+        <div class="card-accent"></div>
+        <h2>22. Validity of the Regulation</h2>
+        <p>This regulation came into force after publication and applies to students enrolled in the Master’s in Computer Science from Winter Semester 2025/2026 onward. From that examination period, it also applies to students who had already been enrolled earlier in the same program.</p>
+        
+      </section>
+    
+      <section class="content-card" id="summary">
+        <div class="card-accent"></div>
+        <h2>Short Overall Summary</h2>
+        <p>The RPTU Master’s in Computer Science is a 2-year, research-oriented Master’s program requiring 120 ECTS. Students must complete coursework across core theoretical and formal areas, choose two different specializations, and complete a 30 ECTS Master’s thesis with colloquium. Exams can normally be repeated twice, and the program is mainly taught in English. Admission depends on academic equivalence, aptitude, and English skills.</p>
+        
+      </section>
+    
+        <p class="note">Source: This page was generated from the overview text you provided.</p>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
