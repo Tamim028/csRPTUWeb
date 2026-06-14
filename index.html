@@ -3424,7 +3424,23 @@
         all work offline. N.B. Kindly verify this information against RPTU
         official documents on your own.
       </p>
+      <p class="footer-note" id="visitorLine">Visitors: …</p>
     </div>
+    <script>
+      // Global visitor counter (no database needed; count is hosted by the
+      // free abacus.jasoncameron.dev service, keyed by the namespace below).
+      (function () {
+        const el = document.getElementById("visitorLine");
+        fetch("https://abacus.jasoncameron.dev/hit/csRPTUWebsite/index")
+          .then((r) => r.json())
+          .then((d) => {
+            el.textContent = "Visitors: " + d.value;
+          })
+          .catch(() => {
+            el.textContent = "Visitors: —";
+          });
+      })();
+    </script>
     <script>
       const STORAGE_KEY = "rptu-course-tracker-v1";
       const checkboxes = Array.from(document.querySelectorAll(".course-check"));
