@@ -1,6 +1,7 @@
 # csRPTUWeb
 Course list for RPTU CS programs
-Currently for Intelligent system + Software Engineering Specialization
+
+(Currently for Intelligent system + Software Engineering Specialization)
 
 1. See all available courses (make sure u recheck with official docs)
 2. ⁠Access course overview, module handbook, qis
